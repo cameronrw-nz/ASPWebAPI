@@ -28,6 +28,7 @@ namespace ASPWebAPI.Controllers
             return _db.GetProducts();
         }
 
+        // GET: api/product/1
         public IHttpActionResult GetProduct(int id)
         {
             var product = products.FirstOrDefault((p) => p.ProductId == id);
