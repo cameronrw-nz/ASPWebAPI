@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using ASPWebAPI.Models;
 using ASPWebAPI.Services;
@@ -8,7 +10,7 @@ namespace ASPWebAPI.Controllers
 {
     public class ProductsController : ApiController
     {
-        private DataAccess _db;
+        private ProductsDataAccess _db;
 
         Product[] products = new Product[]
         {
@@ -19,7 +21,7 @@ namespace ASPWebAPI.Controllers
 
         public ProductsController()
         {
-            _db = new DataAccess();
+            _db = new ProductsDataAccess();
         }
 
         // GET: api/Products
@@ -37,6 +39,51 @@ namespace ASPWebAPI.Controllers
                 return NotFound();
             }
             return Ok(product);
+        }
+
+        // POST: api/product
+        public IHttpActionResult PostProduct([FromBody]Product product)
+        {
+            try
+            {
+                _db.InsertProduct(product);
+
+                return Created(new Uri(Request.RequestUri + product.ProductId.ToString()), product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        // POST: api/product/1
+        public IHttpActionResult PutProduct([FromUri] int productId, [FromBody]Product product)
+        {
+            try
+            {
+                _db.UpdateProduct(product);
+
+                return Created(new Uri(Request.RequestUri + product.ProductId.ToString()), product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        // Delete api/products/1
+        public IHttpActionResult DeleteProduct(int id)
+        {
+            try
+            {
+                _db.DeleteProduct(id);
+
+                return Created(new Uri(Request.RequestUri + id.ToString()), id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
     }
 }
