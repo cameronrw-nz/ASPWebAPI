@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 using ASPWebAPI.Models;
 using ASPWebAPI.Services;
@@ -34,10 +33,12 @@ namespace ASPWebAPI.Controllers
         public IHttpActionResult GetProduct(int id)
         {
             var product = products.FirstOrDefault((p) => p.ProductId == id);
+
             if (product == null)
             {
                 return NotFound();
             }
+
             return Ok(product);
         }
 
