@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ASPWebAPI.Services
 {
-    public class ProductsDataAccess
+    public class ProductsDataAccess : IProductsDataAccess
     {
         private MongoClient _client;
         private IMongoDatabase _db;

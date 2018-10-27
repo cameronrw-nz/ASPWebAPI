@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <None Include="Resources\unity.config" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,8 @@
     </Compile>
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ICustomersDataAccess.cs" />
+    <Compile Include="Services\IProductDataAccess.cs" />
     <Compile Include="Services\ProductsDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>

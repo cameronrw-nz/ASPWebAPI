@@ -9,22 +9,26 @@ namespace ASPWebAPI.Controllers
 {
     public class CustomersController : ApiController
     {
-        private CustomersDataAccess _db;
+        private ICustomersDataAccess _dataAccess;
 
         Customer[] customers = new Customer[]
         {
             new Customer { CustomerId = 1, CustomerName = "Bob Savory" },
         };
 
-        public CustomersController()
+        public CustomersController() : this((CustomersDataAccess)WebApiConfig.UnityContainer.Resolve(typeof(ICustomersDataAccess), "", null))
         {
-            _db = new CustomersDataAccess();
+        }
+
+        public CustomersController(ICustomersDataAccess customersDataAccess)
+        {
+            _dataAccess = customersDataAccess;
         }
 
         // GET: api/Customers
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return _db.GetCustomers();
+            return _dataAccess.GetCustomers();
         }
 
         // GET: api/customer/1
@@ -45,7 +49,7 @@ namespace ASPWebAPI.Controllers
         {
             try
             {
-                _db.InsertCustomer(customer);
+                _dataAccess.InsertCustomer(customer);
 
                 return Created(new Uri(Request.RequestUri + customer.CustomerId.ToString()), customer);
             }
@@ -60,7 +64,7 @@ namespace ASPWebAPI.Controllers
         {
             try
             {
-                _db.UpdateCustomer(customer);
+                _dataAccess.UpdateCustomer(customer);
 
                 return Created(new Uri(Request.RequestUri + customer.CustomerId.ToString()), customer);
             }
@@ -75,7 +79,7 @@ namespace ASPWebAPI.Controllers
         {
             try
             {
-                _db.DeleteCustomer(id);
+                _dataAccess.DeleteCustomer(id);
 
                 return Created(new Uri(Request.RequestUri + id.ToString()), id);
             }

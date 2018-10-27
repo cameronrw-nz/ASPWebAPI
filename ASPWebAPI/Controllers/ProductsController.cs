@@ -9,7 +9,7 @@ namespace ASPWebAPI.Controllers
 {
     public class ProductsController : ApiController
     {
-        private ProductsDataAccess _db;
+        private IProductsDataAccess _dataAccess;
 
         Product[] products = new Product[]
         {
@@ -18,15 +18,19 @@ namespace ASPWebAPI.Controllers
             new Product { ProductId = 3, ProductName = "Hammer", Category = "Hardware", Price = 16 }
         };
 
-        public ProductsController()
+        public ProductsController() : this((ProductsDataAccess)WebApiConfig.UnityContainer.Resolve(typeof(IProductsDataAccess), "", null))
         {
-            _db = new ProductsDataAccess();
+        }
+
+        public ProductsController(IProductsDataAccess productDataAccess)
+        {
+            _dataAccess = productDataAccess;
         }
 
         // GET: api/Products
         public IEnumerable<Product> GetAllProducts()
         {
-            return _db.GetProducts();
+            return _dataAccess.GetProducts();
         }
 
         // GET: api/product/1
@@ -47,7 +51,7 @@ namespace ASPWebAPI.Controllers
         {
             try
             {
-                _db.InsertProduct(product);
+                _dataAccess.InsertProduct(product);
 
                 return Created(new Uri(Request.RequestUri + product.ProductId.ToString()), product);
             }
@@ -62,7 +66,7 @@ namespace ASPWebAPI.Controllers
         {
             try
             {
-                _db.UpdateProduct(product);
+                _dataAccess.UpdateProduct(product);
 
                 return Created(new Uri(Request.RequestUri + product.ProductId.ToString()), product);
             }
@@ -77,7 +81,7 @@ namespace ASPWebAPI.Controllers
         {
             try
             {
-                _db.DeleteProduct(id);
+                _dataAccess.DeleteProduct(id);
 
                 return Created(new Uri(Request.RequestUri + id.ToString()), id);
             }
