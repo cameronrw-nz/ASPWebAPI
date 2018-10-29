@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ASPWebAPI.Models;
 using ASPWebAPI.Services;
 
 namespace ASPWebAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     public class ProductsController : ApiController
     {
         private IProductsDataAccess _dataAccess;

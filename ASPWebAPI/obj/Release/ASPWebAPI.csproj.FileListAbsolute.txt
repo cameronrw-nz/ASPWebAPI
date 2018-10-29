@@ -95,3 +95,6 @@ D:\Projects\ASPWebAPI\ASPWebAPI\bin\Unity.Interception.pdb
 D:\Projects\ASPWebAPI\ASPWebAPI\bin\Unity.Interception.Configuration.pdb
 D:\Projects\ASPWebAPI\ASPWebAPI\bin\Unity.RegistrationByConvention.pdb
 D:\Projects\ASPWebAPI\ASPWebAPI\bin\Unity.ServiceLocation.pdb
+D:\Projects\ASPWebAPI\ASPWebAPI\bin\System.Web.Cors.dll
+D:\Projects\ASPWebAPI\ASPWebAPI\bin\System.Web.Http.Cors.dll
+D:\Projects\ASPWebAPI\ASPWebAPI\bin\System.Web.Http.Cors.xml
