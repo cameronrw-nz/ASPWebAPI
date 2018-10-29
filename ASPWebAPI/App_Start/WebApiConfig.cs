@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity.Configuration;
 using System.Configuration;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using Unity;
 
@@ -21,6 +22,8 @@ namespace ASPWebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             UnityContainer = new UnityContainer();
             //UnityContainer.LoadConfiguration("RegisteredTypes");
