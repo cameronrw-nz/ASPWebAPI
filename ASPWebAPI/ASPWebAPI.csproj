@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Services\CustomersDataAccess.cs" />
     <Compile Include="Controllers\ProductsController.cs" />

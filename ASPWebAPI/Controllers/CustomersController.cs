@@ -18,7 +18,7 @@ namespace ASPWebAPI.Controllers
             new Customer { CustomerId = 1, CustomerName = "Bob Savory" },
         };
 
-        public CustomersController() : this((CustomersDataAccess)WebApiConfig.UnityContainer.Resolve(typeof(ICustomersDataAccess), "", null))
+        public CustomersController() : this((ICustomersDataAccess)WebApiConfig.UnityContainer.Resolve(typeof(ICustomersDataAccess), "", null))
         {
         }
 

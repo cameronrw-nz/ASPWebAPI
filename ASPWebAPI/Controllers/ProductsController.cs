@@ -20,7 +20,7 @@ namespace ASPWebAPI.Controllers
             new Product { ProductId = 3, ProductName = "Hammer", Category = "Hardware", Price = 16 }
         };
 
-        public ProductsController() : this((ProductsDataAccess)WebApiConfig.UnityContainer.Resolve(typeof(IProductsDataAccess), "", null))
+        public ProductsController() : this((IProductsDataAccess)WebApiConfig.UnityContainer.Resolve(typeof(IProductsDataAccess), "", null))
         {
         }
 
