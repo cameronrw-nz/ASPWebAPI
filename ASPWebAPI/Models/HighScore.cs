@@ -13,7 +13,7 @@ namespace ASPWebAPI.Models
         [BsonElement("Score")]
         public int Score { get; set; }
 
-        [BsonElement("")]
-        public string Player { get; set; }
+        [BsonElement("PlayerId")]
+        public int PlayerId { get; set; }
     }
 }

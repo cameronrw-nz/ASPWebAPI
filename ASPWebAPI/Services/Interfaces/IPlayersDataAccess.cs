@@ -7,6 +7,8 @@ namespace ASPWebAPI.Services
     {
         IEnumerable<Player> GetPlayers();
 
+        Player GetPlayer(string userName);
+
         void InsertPlayer(Player insertedPlayer);
 
         void UpdatePlayer(Player updatedPlayer);

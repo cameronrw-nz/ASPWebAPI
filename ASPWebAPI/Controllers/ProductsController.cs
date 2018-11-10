@@ -63,7 +63,7 @@ namespace ASPWebAPI.Controllers
             }
         }
 
-        // POST: api/product/1
+        // PUT: api/product/1
         public IHttpActionResult PutProduct([FromUri] int productId, [FromBody]Product product)
         {
             try

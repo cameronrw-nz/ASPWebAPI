@@ -146,6 +146,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\HighScoreController.cs" />
+    <Compile Include="Models\HighScore.cs" />
+    <Compile Include="Services\HighScoreDataAccess.cs" />
+    <Compile Include="Services\Interfaces\IHighScoreDataAccess.cs" />
+    <Compile Include="Services\Interfaces\IPlayersDataAccess.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Services\CustomersDataAccess.cs" />
@@ -155,8 +160,10 @@
     </Compile>
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ICustomersDataAccess.cs" />
-    <Compile Include="Services\IProductDataAccess.cs" />
+    <Compile Include="Services\Interfaces\ICustomersDataAccess.cs" />
+    <Compile Include="Services\Interfaces\IProductsDataAccess.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Services\PlayersDataAccess.cs" />
     <Compile Include="Services\ProductsDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>

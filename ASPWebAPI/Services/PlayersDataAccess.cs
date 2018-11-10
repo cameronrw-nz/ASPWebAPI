@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ASPWebAPI.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -24,6 +26,12 @@ namespace ASPWebAPI.Services
             return _players.Find(new BsonDocument()).ToEnumerable();
         }
 
+        public Player GetPlayer(string userName)
+        {
+            return _players.Find(player => player.UserName == userName).Single();
+        }
+
+        // TODO Insert with new PlayerId
         public void InsertPlayer(Player insertedPlayer)
         {
             _players.InsertOne(insertedPlayer);
