@@ -7,7 +7,7 @@ namespace ASPWebAPI.Services
     {
         IEnumerable<HighScore> GetHighScores();
 
-        HighScore GetHighScore(int playerId);
+        HighScore GetHighScore(string playerUserName);
 
         void InsertHighScore(HighScore insertedHighScore);
 

@@ -40,7 +40,7 @@ namespace ASPWebAPI.Controllers
                     _dataAccess.UpdatePlayer(player);
                 }
                 
-                return Created(new Uri(Request.RequestUri + player.PlayerId.ToString()), player);
+                return Created(new Uri(Request.RequestUri + player.UserName), player);
             }
             catch (Exception ex)
             {

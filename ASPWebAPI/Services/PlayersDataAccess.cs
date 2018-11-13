@@ -23,18 +23,18 @@ namespace ASPWebAPI.Services
 
         public IEnumerable<Player> GetPlayers()
         {
-            return _players.Find(new BsonDocument()).ToEnumerable();
+            return _players?.Find(new BsonDocument()).ToEnumerable();
         }
 
         public Player GetPlayer(string userName)
         {
-            return _players.Find(player => player.UserName == userName).Single();
+            return _players?.Find(player => player.UserName == userName)?.SingleOrDefault();
         }
 
         // TODO Insert with new PlayerId
         public void InsertPlayer(Player insertedPlayer)
         {
-            _players.InsertOne(insertedPlayer);
+            _players?.InsertOne(insertedPlayer);
         }
 
         public void UpdatePlayer(Player updatedPlayer)
@@ -43,9 +43,9 @@ namespace ASPWebAPI.Services
             throw new NotImplementedException();
         }
 
-        public void DeletePlayer(int playerId)
+        public void DeletePlayer(string userName)
         {
-            _players.DeleteOne(player => player.PlayerId == playerId);
+            _players.DeleteOne(player => player.UserName == userName);
             throw new NotImplementedException();
         }
     }

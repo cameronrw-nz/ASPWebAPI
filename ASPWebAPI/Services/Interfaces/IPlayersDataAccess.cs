@@ -13,6 +13,6 @@ namespace ASPWebAPI.Services
 
         void UpdatePlayer(Player updatedPlayer);
 
-        void DeletePlayer(int playerId);
+        void DeletePlayer(string userName);
     }
 }

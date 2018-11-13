@@ -18,9 +18,9 @@ namespace ASPWebAPI.Services
             _highScores = _db.GetCollection<HighScore>("HighScore");
         }
 
-        public HighScore GetHighScore(int playerId)
+        public HighScore GetHighScore(string playerUserName)
         {
-            return _highScores.Find(highScore => highScore.PlayerId == playerId).Single();
+            return _highScores?.Find(highScore => highScore.PlayerUserName == playerUserName).SingleOrDefault();
         }
 
         public IEnumerable<HighScore> GetHighScores()
@@ -37,7 +37,7 @@ namespace ASPWebAPI.Services
         public void UpdateHighScore(HighScore updatedHighScore)
         {
             var updateStatement = Builders<HighScore>.Update.Set(o => o.Score, updatedHighScore.Score);
-            _highScores.UpdateOne(highScore => highScore.HighScoreId == updatedHighScore.HighScoreId, updateStatement);
+            _highScores.UpdateOne(highScore => highScore.Id == updatedHighScore.Id, updateStatement);
         }
     }
 }

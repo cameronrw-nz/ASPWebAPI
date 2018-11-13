@@ -7,9 +7,6 @@ namespace ASPWebAPI.Models
     {
         public ObjectId Id { get; set; }
 
-        [BsonElement("PlayerId")]
-        public int PlayerId { get; set; }
-
         [BsonElement("UserName")]
         public string UserName { get; set; }
     }

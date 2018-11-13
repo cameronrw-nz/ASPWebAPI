@@ -2,6 +2,7 @@
 using ASPWebAPI.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -22,11 +23,22 @@ namespace ASPWebAPI.Controllers
         public HighScoreController(IHighScoreDataAccess highScoreDataAccess, IPlayersDataAccess playersDataAccess)
         {
             _highScoreDataAccess = highScoreDataAccess;
+            _playersDataAccess = playersDataAccess;
         }
 
         public IEnumerable<HighScore> GetAllHighScores()
         {
-            return _highScoreDataAccess.GetHighScores();
+            var players = _playersDataAccess.GetPlayers();
+            var highScores = _highScoreDataAccess.GetHighScores();
+
+            var returnedHighScores = new List<HighScore>();
+            foreach (HighScore highScore in highScores)
+            {
+                highScore.Player = players.SingleOrDefault(player => string.Equals(player.UserName, highScore.PlayerUserName));
+                returnedHighScores.Add(highScore);
+            }
+
+            return returnedHighScores;
         }
 
         public IHttpActionResult PostHighScore([FromBody]Player player)
@@ -39,7 +51,7 @@ namespace ASPWebAPI.Controllers
 
                 var highScore = new HighScore()
                                 {
-                                    PlayerId = player.PlayerId,
+                                    PlayerUserName = player.UserName,
                                     Score = 1
                                 };
 
@@ -47,13 +59,13 @@ namespace ASPWebAPI.Controllers
             }
             else
             {
-                var highScore = _highScoreDataAccess.GetHighScore(existingPlayer.PlayerId);
+                var highScore = _highScoreDataAccess.GetHighScore(existingPlayer.UserName);
 
                 if (highScore == null)
                 {
                     highScore = new HighScore()
                                 {
-                                    PlayerId = player.PlayerId,
+                                    PlayerUserName = player.UserName,
                                     Score = 1
                                 };
 
@@ -66,7 +78,7 @@ namespace ASPWebAPI.Controllers
                 }
             }
 
-            return Created(new Uri(Request.RequestUri + player.PlayerId.ToString()), player);
+            return Created(new Uri(Request.RequestUri + player.UserName), player);
         }
     }
 }
