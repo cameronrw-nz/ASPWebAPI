@@ -41,7 +41,7 @@ namespace ASPWebAPI.Controllers
             return returnedHighScores;
         }
 
-        public IHttpActionResult PostHighScore([FromBody]Player player)
+        public IHttpActionResult PutHighScore([FromBody]Player player)
         {
             var existingPlayer = _playersDataAccess.GetPlayer(player.UserName);
 

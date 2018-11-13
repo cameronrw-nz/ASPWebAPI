@@ -26,18 +26,34 @@ namespace ASPWebAPI.Controllers
             return _dataAccess.GetPlayers();
         }
 
-        public IHttpActionResult PostPlayer([FromBody]Player player)
+        // PUT: api/players/Cameron
+        public IHttpActionResult PutPlayer([FromUri] string userName, [FromBody]Player player)
         {
             try
             {
-                var existingPlayer = _dataAccess.GetPlayer(player.UserName);
+                var existingPlayer = _dataAccess.GetPlayer(userName);
                 if (existingPlayer == null)
                 {
-                    _dataAccess.InsertPlayer(player);
+                    if (player == null)
+                    {
+                        _dataAccess.InsertPlayer(new Player { UserName = userName });
+                    }
+                    else
+                    {
+                        _dataAccess.InsertPlayer(player);
+                    }
                 }
                 else
                 {
-                    _dataAccess.UpdatePlayer(player);
+                    if (player == null)
+                    {
+                        existingPlayer.UserName = userName;
+                        _dataAccess.UpdatePlayer(existingPlayer);
+                    }
+                    else
+                    {
+                        _dataAccess.UpdatePlayer(player);
+                    }
                 }
                 
                 return Created(new Uri(Request.RequestUri + player.UserName), player);

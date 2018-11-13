@@ -64,7 +64,7 @@ namespace ASPWebAPI.Controllers
         }
 
         // PUT: api/product/1
-        public IHttpActionResult PutProduct([FromUri] int productId, [FromBody]Product product)
+        public IHttpActionResult PutProduct(int productId, [FromBody]Product product)
         {
             try
             {
