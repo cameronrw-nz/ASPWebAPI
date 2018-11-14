@@ -41,17 +41,17 @@ namespace ASPWebAPI.Controllers
             return returnedHighScores;
         }
 
-        public IHttpActionResult PutHighScore([FromBody]Player player)
+        public IHttpActionResult PutHighScore(string userName)
         {
-            var existingPlayer = _playersDataAccess.GetPlayer(player.UserName);
+            var existingPlayer = _playersDataAccess.GetPlayer(userName);
 
             if (existingPlayer == null)
             {
-                _playersDataAccess.InsertPlayer(player);
+                _playersDataAccess.InsertPlayer(new Player { UserName = userName });
 
                 var highScore = new HighScore()
                                 {
-                                    PlayerUserName = player.UserName,
+                                    PlayerUserName = userName,
                                     Score = 1
                                 };
 
@@ -65,7 +65,7 @@ namespace ASPWebAPI.Controllers
                 {
                     highScore = new HighScore()
                                 {
-                                    PlayerUserName = player.UserName,
+                                    PlayerUserName = userName,
                                     Score = 1
                                 };
 
@@ -78,7 +78,7 @@ namespace ASPWebAPI.Controllers
                 }
             }
 
-            return Created(new Uri(Request.RequestUri + player.UserName), player);
+            return Created(new Uri(Request.RequestUri + userName), userName);
         }
     }
 }
