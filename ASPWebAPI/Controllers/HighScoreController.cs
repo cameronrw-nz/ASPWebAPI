@@ -45,11 +45,13 @@ namespace ASPWebAPI.Controllers
         {
             var existingPlayer = _playersDataAccess.GetPlayer(userName);
 
+            HighScore highScore;
+
             if (existingPlayer == null)
             {
                 _playersDataAccess.InsertPlayer(new Player { UserName = userName });
 
-                var highScore = new HighScore()
+                highScore = new HighScore()
                                 {
                                     PlayerUserName = userName,
                                     Score = 1
@@ -59,7 +61,7 @@ namespace ASPWebAPI.Controllers
             }
             else
             {
-                var highScore = _highScoreDataAccess.GetHighScore(existingPlayer.UserName);
+                highScore = _highScoreDataAccess.GetHighScore(existingPlayer.UserName);
 
                 if (highScore == null)
                 {
@@ -78,7 +80,7 @@ namespace ASPWebAPI.Controllers
                 }
             }
 
-            return Created(new Uri(Request.RequestUri + userName), userName);
+            return Created(new Uri(Request.RequestUri + userName), highScore);
         }
     }
 }
